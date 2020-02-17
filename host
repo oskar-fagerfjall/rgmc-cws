@@ -1,5 +1,14 @@
 [cws]
-cws*
+cws0
+cws1
+cws2
+cws3
+cws4
+cws5
+cws6
+cws7
+cws8
+cws9
 
 [cws:vars]
 ansible_become_user=se
