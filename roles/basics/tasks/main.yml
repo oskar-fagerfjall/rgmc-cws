@@ -41,5 +41,5 @@
   cron:
     name: "Ensure ansible-pull cronjob exists"
     minute: "7"
-    hour: "0"
+    hour: "3"
     job: "/usr/bin/ansible-pull -i host -U https://github.com/oskar-fagerfjall/rgmc-cws main.yml 2&>1 > /tmp/cron-ansiblepull"
