@@ -1,0 +1,6 @@
+---
+- hosts: local
+  tasks:
+    - import_role:
+        name: basics
+        
