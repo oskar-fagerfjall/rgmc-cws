@@ -1,2 +1,6 @@
-[local]
-127.0.0.1
+[cws]
+cws[0:10]
+
+[cws:vars]
+ansible_become_user: se
+
