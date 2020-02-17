@@ -1,6 +1,6 @@
 [cws]
-cws[0:10]
+cws0
 
 [cws:vars]
-ansible_become_user: se
+ansible_become_user=se
 
