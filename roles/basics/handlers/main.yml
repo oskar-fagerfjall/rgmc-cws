@@ -2,3 +2,7 @@
 - name: Update GRUB
   command: update-grub
   become: true
+
+- name: Apply GNOME configuration
+  command: dconf update
+  become: true

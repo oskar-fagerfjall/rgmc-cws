@@ -54,3 +54,35 @@
   become: true
   notify:
     - "Update GRUB"
+
+- name: Ensure GNOME loads site-wide settings
+  template:
+    src: "dconf-profile.j2"
+    dest: "/etc/dconf/profile/user"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: true
+
+- name: Install site-wide GNOME configuration
+  template:
+    src: "dconf-db.j2"
+    dest: "/etc/dconf/db/site.d/ansible"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: true
+  notify:
+    - "Apply GNOME configuration"
+
+- name: Lock down certain GNOME settings
+  template:
+    src: "dconf-locks.j2"
+    dest: "/etc/dconf/db/site.d/locks/ansible"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: true
+  notify:
+    - "Apply GNOME configuration"
+
