@@ -55,6 +55,23 @@
   notify:
     - "Update GRUB"
 
+
+- name: Create GNOME settings directory
+  file:
+    path: /etc/dconf/db/site.d/locks
+    state: directory
+    mode: '0755'
+    recurse: true
+  become: true
+
+- name: Create GNOME profile directory
+  file:
+    path: /etc/dconf/profile
+    state: directory
+    mode: '0755'
+    recurse: true
+  become: true
+
 - name: Ensure GNOME loads site-wide settings
   template:
     src: "dconf-profile.j2"
