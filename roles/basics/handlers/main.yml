@@ -1,2 +1,4 @@
 ---
-# handlers file for basics
+- name: Update GRUB
+  command: update-grub
+  become: true

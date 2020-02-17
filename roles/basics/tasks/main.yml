@@ -37,9 +37,20 @@
     state: absent
   become: true
 
-- name: Ensure ansible-pull cronjob exists.
+- name: Ensure ansible-pull cronjob exists
   cron:
     name: "Ensure ansible-pull cronjob exists"
     minute: "7"
     hour: "3"
     job: "/usr/bin/ansible-pull -i host -U https://github.com/oskar-fagerfjall/rgmc-cws main.yml 2&>1 > /tmp/cron-ansiblepull"
+
+- name: Ensure silent boot is disabled in GRUB
+  template:
+    src: "grub.j2"
+    dest: "/etc/default/grub"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: true
+  notify:
+    - "Update GRUB"
