@@ -103,6 +103,16 @@
   tags:
     - extensions
 
+# Added by Oskar. There is now a better command line tool for extension handling.
+- name: Enable GNOME extensions
+  shell:
+    cmd: "gnome-extensions enable {{ item.name }}"
+  become_user: "{{ gnome_user }}"
+  become: true
+  with_items: "{{ gnome_extensions }}"
+  tags:
+    - extensions
+
 - name: Modify application settings using gsettings
   shell: dbus-launch gsettings set {{ item.schema }} {{ item.key }} {{ item.value }}
   become_user: "{{ gnome_user }}"
