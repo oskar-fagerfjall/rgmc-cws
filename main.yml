@@ -3,5 +3,5 @@
   tasks:
     - import_role:
         name: basics
-    - import_role:
-        name: customize-gnome
+#    - import_role:
+#        name: customize-gnome
