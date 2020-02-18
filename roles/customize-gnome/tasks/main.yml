@@ -104,6 +104,7 @@
     - extensions
 
 # Added by Oskar. There is now a better command line tool for extension handling.
+# ... which does not work when using sudo... probably needs users D-Bus.
 - name: Enable GNOME extensions
   shell:
     cmd: "gnome-extensions enable {{ item.name }}"
