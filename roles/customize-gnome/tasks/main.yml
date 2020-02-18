@@ -22,6 +22,7 @@
     path: "/home/{{ gnome_user }}/.config/{{ gtk_version }}"
     state: directory
   become_user: "{{ gnome_user }}"
+  become: true
   when: gtk_version is defined
 
 - name: Copy files
@@ -83,7 +84,9 @@
   file:
     path: /home/{{ gnome_user }}/.local/share/gnome-shell/extensions/{{ item.name }}
     state: directory
+    recurse: true
   become_user: "{{ gnome_user }}"
+  become: true
   with_items: "{{ gnome_extensions }}"
   tags:
     - extensions
@@ -95,6 +98,7 @@
     creates: "/home/{{ gnome_user }}/.local/share/gnome-shell/extensions/{{ item.name }}/metadata.json"
     remote_src: yes
   become_user: "{{ gnome_user }}"
+  become: true
   with_items: "{{ gnome_extensions }}"
   tags:
     - extensions
@@ -102,6 +106,7 @@
 - name: Modify application settings using gsettings
   shell: dbus-launch gsettings set {{ item.schema }} {{ item.key }} {{ item.value }}
   become_user: "{{ gnome_user }}"
+  become: true
   with_items: "{{ gnome_gsettings }}"
   tags:
     - settings
@@ -109,6 +114,7 @@
 - name: Modify application settings using dconf
   shell: dbus-launch dconf write {{ item.key }} {{ item.value }}
   become_user: "{{ gnome_user }}"
+  become: true
   with_items: "{{ gnome_dconf }}"
   tags:
     - settings
