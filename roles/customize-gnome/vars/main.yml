@@ -1,0 +1,4 @@
+---
+gnome_user: cws
+gnome_extensions:
+  - id: 672

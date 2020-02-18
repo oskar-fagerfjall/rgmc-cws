@@ -1,0 +1,8 @@
+---
+gnome_user: root
+gnome_packages: []
+gnome_fonts: []
+gnome_files: []
+gnome_extensions: []
+gnome_gsettings: []
+gnome_dconf: []
