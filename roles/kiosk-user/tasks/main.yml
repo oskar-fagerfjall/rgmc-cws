@@ -1,0 +1,20 @@
+---
+
+- name: Ensure ansible-pull cronjob exists
+  cron:
+    name: "Ensure ansible-pull cronjob exists"
+    minute: "0"
+    hour: "*"
+    job: "/usr/bin/ansible-pull -U https://github.com/oskar-fagerfjall/rgmc-cws user-cws.yml 2&>1 > /tmp/cron-ansiblepull-user"
+
+- name: Ensure user autostart directory exists
+  file:
+    path: "/home/cws/.config/autostart"
+    state: directory
+    mode: '0700'
+
+- name: Ensure user autostarts Firefox in Kiosk mode
+  template:
+    src: "firefox-kiosk.desktop.j2"
+    dest: "/home/cws/.config/autostart/firefox-kiosk.desktop"
+    mode: "0644"

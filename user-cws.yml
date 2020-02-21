@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  tasks:
+    - import_role:
+        name: kiosk-user
+#    - import_role:
+#        name: customize-gnome
