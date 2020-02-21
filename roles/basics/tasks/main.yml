@@ -55,34 +55,7 @@
   notify:
     - "Update GRUB"
 
-
-- name: Create directory for disable-screenshield extension
-  file:
-    path: "/usr/share/gnome-shell/extensions/disable-screenshield@lgpasquale.com"
-    state: directory
-    mode: '0755'
-    recurse: true
-  become: true
-
-- name: Copy disable-screenshield extension
-  unarchive:
-    src: "disable-screenshield@lgpasquale.com.v7.shell-extension.zip"
-    dest: "/usr/share/gnome-shell/extensions/disable-screenshield@lgpasquale.com"
-    owner: "root"
-    group: "root"
-    mode: "0755"
-  become: true
-
-- name: Add script enabling extensions to system-wide login script
-  template:
-    src: "enable-gnome-extensions.sh.j2"
-    dest: "/etc/profile.d/enable-gnome-extensions.sh"
-    owner: "root"
-    group: "root"
-    mode: "0755"
-  become: true
-
-
+    
 - name: Create GNOME settings directory
   file:
     path: /etc/dconf/db/site.d/locks
