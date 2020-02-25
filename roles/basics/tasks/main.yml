@@ -103,3 +103,10 @@
   notify:
     - "Apply GNOME configuration"
 
+- name: Set up SE authorized keys
+  authorized_key:
+    user: se
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - se.pub
