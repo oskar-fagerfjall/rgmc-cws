@@ -1,11 +1,11 @@
 ---
 - name: Update motd
   template:
-    src: "motd.j2"
-    dest: "/etc/motd"
-    owner: "root"
-    group: "root"
-    mode: "0644"
+    src: motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: '0644'
   become: true
 
 - name: "Update bashrc: colour prompt"
@@ -46,59 +46,70 @@
 
 - name: Ensure silent boot is disabled in GRUB
   template:
-    src: "grub.j2"
-    dest: "/etc/default/grub"
-    owner: "root"
-    group: "root"
-    mode: "0644"
+    src: grub.j2
+    dest: /etc/default/grub
+    owner: root
+    group: root
+    mode: '0644'
   become: true
   notify:
-    - "Update GRUB"
+    - Update GRUB
 
 
-- name: Create GNOME settings directory
+- name: Ensure GNOME site-wide settings directory exists
+  file:
+    path: /etc/dconf/db/site.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+  - name: Ensure GNOME site-wide locks directory exists
   file:
     path: /etc/dconf/db/site.d/locks
     state: directory
+    owner: root
+    group: root
     mode: '0755'
-    recurse: true
   become: true
 
-- name: Create GNOME profile directory
+- name: Ensure GNOME profile directory exists
   file:
     path: /etc/dconf/profile
     state: directory
+    owner: root
+    group: root
     mode: '0755'
-    recurse: true
   become: true
 
-- name: Ensure GNOME loads site-wide settings
+- name: Ensure GNOME site-wide settings will be loaded
   template:
-    src: "dconf-profile.j2"
-    dest: "/etc/dconf/profile/user"
-    owner: "root"
-    group: "root"
-    mode: "0644"
+    src: dconf-profile.j2
+    dest: /etc/dconf/profile/user
+    owner: root
+    group: root
+    mode: '0644'
   become: true
 
-- name: Install site-wide GNOME configuration
+- name: Ensure GNOME site-wide settings are configured
   template:
-    src: "dconf-db.j2"
-    dest: "/etc/dconf/db/site.d/ansible"
-    owner: "root"
-    group: "root"
-    mode: "0644"
+    src: dconf-db.j2
+    dest: /etc/dconf/db/site.d/ansible
+    owner: root
+    group: root
+    mode: '0644'
   become: true
 # notify:
 #   - "Apply GNOME configuration"
 
-- name: Lock down certain GNOME settings
+- name: Ensure GNOME site-wide settings are locked down
   template:
-    src: "dconf-locks.j2"
-    dest: "/etc/dconf/db/site.d/locks/ansible"
-    owner: "root"
-    group: "root"
-    mode: "0644"
+    src: dconf-locks.j2
+    dest: /etc/dconf/db/site.d/locks/ansible
+    owner: root
+    group: root
+    mode: '0644'
   become: true
 # notify:
 #   - "Apply GNOME configuration"

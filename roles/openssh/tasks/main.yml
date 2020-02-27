@@ -16,7 +16,9 @@
   template:
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
-    mode: 0644
+    owner: root
+    group: root
+    mode: '0644'
   become: true
   notify:
     - Restart SSH service
@@ -25,7 +27,9 @@
   template:
     src: ssh_config.j2
     dest: /etc/ssh/ssh_config
-    mode: 0644
+    owner: root
+    group: root
+    mode: '0644'
   become: true
 
 - name: Set up SE authorized keys
