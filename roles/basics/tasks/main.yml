@@ -1,21 +1,11 @@
 ---
-- name: Update motd
+- name: Update Message-of-the-Day
   template:
     src: motd.j2
     dest: /etc/motd
     owner: root
     group: root
     mode: '0644'
-  become: true
-
-- name: "Update bashrc: colour prompt"
-  lineinfile:
-    path: "/etc/bash.bashrc"
-    regexp: "force_color_prompt=yes"
-    line: "force_color_prompt=yes"
-    state: present
-    insertafter: EOF
-  when: basics_colorprompt | bool
   become: true
 
 - name: Remove cloud-init
@@ -121,3 +111,18 @@
   become: true
 # notify:
 #   - "Apply GNOME configuration"
+
+- name: Ensure automatic updates are enabled
+  apt:
+    - name: unattended-upgrades
+    - state: latest 
+  become: true
+
+- name: Ensure automatic updates are configured
+  template:
+    src: autoupdates.j2
+    dest: /etc/apt/apt.conf.d/88autoupdate-rgmc
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
