@@ -1,0 +1,23 @@
+- name: Ensure Firefox is installed
+  apt:
+    name: firefox
+    state: latest
+  become: true
+
+- name: Ensure Firefox policy directory exists
+  file:
+    path: /usr/lib/firefox/distribution
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Ensure policy file is present
+  template:
+    src: policies.json.j2
+    dest: /usr/lib/firefox/distribution/policies.json
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
