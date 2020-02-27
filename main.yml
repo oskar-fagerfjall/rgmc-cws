@@ -5,5 +5,7 @@
         name: basics
     - import_role:
         name: openssh
+    - import_role:
+        name: hosts
 #    - import_role:
 #        name: customize-gnome

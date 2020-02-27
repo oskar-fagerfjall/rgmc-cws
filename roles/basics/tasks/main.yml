@@ -65,7 +65,7 @@
     mode: '0755'
   become: true
 
-  - name: Ensure GNOME site-wide locks directory exists
+- name: Ensure GNOME site-wide locks directory exists
   file:
     path: /etc/dconf/db/site.d/locks
     state: directory
