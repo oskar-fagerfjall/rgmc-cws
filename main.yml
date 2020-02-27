@@ -3,5 +3,7 @@
   tasks:
     - import_role:
         name: basics
+    - import_role:
+        name: openssh
 #    - import_role:
 #        name: customize-gnome
