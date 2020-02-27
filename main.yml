@@ -9,6 +9,7 @@
         name: hosts
     - import_role:
         name: ansible
-    
+    - import_role:
+        name: firefox    
 #    - import_role:
 #        name: customize-gnome
