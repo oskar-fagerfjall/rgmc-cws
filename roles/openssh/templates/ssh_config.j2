@@ -3,3 +3,6 @@
 Host *
   SendEnv LANG LC_*
   GSSAPIAuthentication yes
+  ControlMaster auto
+  ControlPersist 60
+  ControlPath ~/.ssh/control-%C
