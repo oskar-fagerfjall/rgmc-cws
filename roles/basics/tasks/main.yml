@@ -89,8 +89,8 @@
     group: "root"
     mode: "0644"
   become: true
-  notify:
-    - "Apply GNOME configuration"
+# notify:
+#   - "Apply GNOME configuration"
 
 - name: Lock down certain GNOME settings
   template:
@@ -100,13 +100,5 @@
     group: "root"
     mode: "0644"
   become: true
-  notify:
-    - "Apply GNOME configuration"
-
-- name: Set up SE authorized keys
-  authorized_key:
-    user: se
-    state: present
-    key: '{{ item }}'
-  with_file:
-    - se.pub
+# notify:
+#   - "Apply GNOME configuration"

@@ -1,0 +1,39 @@
+- name: Ensure the lastest OpenSSH is installed
+  apt:
+    name: openssh-server
+    install_recommends: yes
+    state: latest 
+  become: true
+
+- name: Ensure the SSH service is enabled and started
+  service:
+    name: sshd
+    enabled: yes
+    state: started
+  become: true
+
+- name: Ensure the SSH service is configured
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    mode: 0644
+  become: true
+  notify:
+    - Restart SSH service
+
+- name: Ensure the SSH client is configured
+  template:
+    src: ssh_config.j2
+    dest: /etc/ssh/ssh_config
+    mode: 0644
+  become: true
+
+- name: Set up SE authorized keys
+  authorized_key:
+    user: se
+    state: present
+    key: '{{ item }}'
+  become: true
+  with_file:
+    - se.pub
+

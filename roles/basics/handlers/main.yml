@@ -3,6 +3,9 @@
   command: update-grub
   become: true
 
-- name: Apply GNOME configuration
-  command: dconf update
-  become: true
+#
+# Applying the dconf config causes firefox to minimize. Restart computer instead. 
+#
+#- name: Apply GNOME configuration
+#  command: dconf update
+#  become: true
