@@ -114,8 +114,8 @@
 
 - name: Ensure automatic updates are enabled
   apt:
-    - name: unattended-upgrades
-    - state: latest 
+    name: unattended-upgrades
+    state: latest 
   become: true
 
 - name: Ensure automatic updates are configured
