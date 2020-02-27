@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ $1 == "system" ]]; then
+    ansible-pull -U https://github.com/oskar-fagerfjall/rgmc-cws main.yml
+elif [[ $1 == "user" ]]; then
+    ansible-pull -U https://github.com/oskar-fagerfjall/rgmc-cws user-cws.yml
+fi
