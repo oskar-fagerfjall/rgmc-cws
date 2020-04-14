@@ -10,14 +10,15 @@
     state: directory
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
   become: true
 
+# Check policies at https://github.com/mozilla/policy-templates/blob/master/README.md
 - name: Ensure policy file is present
   template:
     src: policies.json.j2
     dest: /usr/lib/firefox/distribution/policies.json
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   become: true
