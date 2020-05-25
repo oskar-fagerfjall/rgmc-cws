@@ -1,0 +1,4 @@
+# Enable extensions if available system-wide
+for i in disable-screenshield@lgpasquale.com; do
+  [ -d /usr/share/gnome-shell/extensions/$i ] && gnome-extensions enable $i
+done
